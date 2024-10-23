@@ -1,0 +1,7 @@
+pymongo~=4.9.1
+flask~=3.0.3
+gunicorn
+flask-cors
+mega.py
+pyopenssl
+gevent

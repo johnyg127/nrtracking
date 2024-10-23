@@ -1,8 +1,8 @@
 from flask import Flask, request, send_file
 from datetime import datetime
-
+from flask_cors import CORS, cross_origin
 app = Flask(__name__)
-
+cors = CORS(app)
 # Set up simple file logging for email opens (no extra logging details)
 def log_to_file(message):
     with open('tracking.txt', 'a') as log_file:
@@ -10,6 +10,7 @@ def log_to_file(message):
 
 
 @app.route('/track/pixel.png')
+@cross_origin()
 def track_email():
     # Get the recipient's IP address
     recipient_ip = request.remote_addr
@@ -24,5 +25,3 @@ def track_email():
     return send_file('pixel.png', mimetype='image/png')
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
